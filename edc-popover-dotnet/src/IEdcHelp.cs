@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.internalImpl.gui.tools;
+using edc_popover_dotnet.src.internalImpl.gui.tools;
 using edc_popover_dotnet.src.internalImpl.model;
 using System;
 

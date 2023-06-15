@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.builder;
+using edc_popover_dotnet.src.builder;
 using edc_popover_dotnet.src.Gui;
 using edc_popover_dotnet.src.internalImpl.factory;
 using edc_popover_dotnet.src.internalImpl.gui;
