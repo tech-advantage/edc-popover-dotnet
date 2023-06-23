@@ -12,8 +12,10 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using edcClientDotnet;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace test_edc_popover_dotnet
+namespace edc_popover_dotnet_example_app
 {
     /// <summary>
     ///     Interaction logic for App.xaml
@@ -21,6 +23,9 @@ namespace test_edc_popover_dotnet
     public partial class App : Application
     {
         static String languageCode = "en";
+        IDesktopProcess edcDesktop;
+        IEdcHelpGui edcHelp;
+        IEdcClient edcClient;
 
         Window mainWindow = new()
         {
@@ -35,44 +40,38 @@ namespace test_edc_popover_dotnet
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            AppDomain.CurrentDomain.ProcessExit += OnApplicationExit;
-            mainWindow.Closing += App_Exit;
+            if (edcDesktop != null)
+            {
+                mainWindow.Closing += App_Exit;
+            }
             SetupGui(mainWindow);
         }
 
         void App_Exit(object sender, CancelEventArgs e)
         {
-            IDesktopProcess edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
             edcDesktop.KillProcess();
         }
 
-        private void OnApplicationExit(object sender, EventArgs e)
-        {
-            IDesktopProcess edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
-            edcDesktop.KillProcess();
-        }
-
-        private static void SetupGui(Window mainWindow)
+        private void SetupGui(Window mainWindow)
         {
             TextBlock titleApp = new();
-            String viewerDesktopPath = "";
-            String viewerDesktopServerURL = "";
-            String serverUrl = "https://demo.easydoccontents.com";
+            String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
+            String viewerDesktopServerURL = "http://localhost:60000";
+            String serverUrl = "";
+
             
+
+            edcHelp = EdcHelpSingletonGui.GetInstance();
+            edcClient = EdcHelpSingletonGui.GetInstance().GetEdcClient();
 
             if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewerDesktopPath))
             {
-                IDesktopProcess edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
-                edcDesktop.CreateProcess(viewerDesktopPath);
-                if (edcDesktop.IsRunning(edcDesktop.GetProcess()))
-                {
-                    EdcHelpSingletonGui.GetInstance().SetViewerDesktopServerURL(viewerDesktopServerURL);
-                    EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(viewerDesktopServerURL);
-                }
+                edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
+                edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
             }
             else
             {
-                EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(serverUrl);
+                edcClient.SetServerUrl(serverUrl);
             }
 
             EdcHelpSingletonGui.GetInstance().SetTooltipLabel("Help");
@@ -83,7 +82,7 @@ namespace test_edc_popover_dotnet
             EdcHelpSingletonGui.GetInstance().SetLanguageCode(languageCode);
             EdcHelpSingletonGui.GetInstance().SetSeparatorDisplay(true);
             EdcHelpSingletonGui.GetInstance().SetIconState(IconState.SHOWN);
-            EdcHelpSingletonGui.GetInstance().SetDarkMode(true);
+            EdcHelpSingletonGui.GetInstance().SetDarkMode(false);
             EdcHelpSingletonGui.GetInstance().SetSeparatorColor(Brushes.Red);
             EdcHelpSingletonGui.GetInstance().SetErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
             EdcHelpSingletonGui.GetInstance().SetPopoverDisplay(true);
@@ -140,7 +139,7 @@ namespace test_edc_popover_dotnet
             langSelectorPanel.Children.Add(langSelect);
 
             WrapPanel wrapHelpIconPanel = new();
-            wrapHelpIconPanel.Children.Add(EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc.configuration", "storehouses"));
+            wrapHelpIconPanel.Children.Add(EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc.showcase.mailreader", "leftmenu.account"));
             wrapHelpIconPanel.Children.Add(EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc", "help.center"));
 
             foreach (Button element in wrapHelpIconPanel.Children)
@@ -217,7 +216,6 @@ namespace test_edc_popover_dotnet
             }
 
             mainWindow.Content = mainGrid;
-
             mainWindow.Show();
         }
 

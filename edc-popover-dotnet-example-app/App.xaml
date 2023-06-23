@@ -1,7 +1,7 @@
-﻿<Application x:Class="test_edc_popover_dotnet.App"
+﻿<Application x:Class="edc_popover_dotnet_example_app.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:test_edc_popover_dotnet"
+             xmlns:local="clr-namespace:edc_popover_dotnet_example_app"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         

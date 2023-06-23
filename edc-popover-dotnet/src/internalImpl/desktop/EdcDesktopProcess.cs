@@ -1,4 +1,6 @@
 ﻿using edc_popover_dotnet.src.desktop;
+using edc_popover_dotnet.src.Gui;
+using edcClientDotnet;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,14 +13,23 @@ namespace edc_popover_dotnet.src.internalImpl.desktop
 
         public void CreateProcess(string programPath)
         {
-            checkAndKillDesktopViewer();
-
             if (edcDesktopProcess == null || !IsRunning(edcDesktopProcess))
             {
                 edcDesktopProcess = new Process();
                 edcDesktopProcess.StartInfo.FileName = programPath;
                 edcDesktopProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(programPath);
                 edcDesktopProcess.Start();
+            }
+        }
+
+        public void ConfigureDesktopProcess(IEdcHelpGui edcHelp, IEdcClient edcClient,String appPath, String serverUrl)
+        {
+            this.CreateProcess(appPath);
+            if (this.IsRunning(this.GetProcess()))
+            {
+                edcHelp.SetViewerDesktopPath(appPath);
+                edcHelp.SetViewerDesktopServerURL(serverUrl);
+                edcClient.SetServerUrl(serverUrl);
             }
         }
 
@@ -44,19 +55,5 @@ namespace edc_popover_dotnet.src.internalImpl.desktop
             }
             return true;
         }
-
-        private void checkAndKillDesktopViewer()
-        {
-            Process[] pname = Process.GetProcessesByName("processname");
-
-            if (pname.Length > 0)
-            {
-                foreach (Process process in pname)
-                {
-                    process.Kill();
-                }
-            }
-        }
-
     }
 }

@@ -25,7 +25,7 @@ namespace edc_popover_dotnet.src.utils
             }
             else if (helpConfiguration.HelpViewer == HelpViewer.SYSTEM_BROWSER)
             {
-                if (!String.IsNullOrEmpty(helpConfiguration.ViewerDesktopServerUrl))
+                if (!String.IsNullOrEmpty(helpConfiguration.ViewerDesktopPath))
                 {
                     _logger.Error("Unable to open browser with this option, please change HelpViewer.SYSTEM_BROWSER option to HelpViewer.EDC_DESKTOP_VIEWER in application startup configuration settings.");
                     return;

@@ -1,5 +1,4 @@
-﻿using edc_popover_dotnet.factory;
-using edc_popover_dotnet.src.desktop;
+﻿using edc_popover_dotnet.src.desktop;
 using edc_popover_dotnet.src.Gui;
 using edc_popover_dotnet.src.internalImpl.gui.tools;
 using edc_popover_dotnet.src.internalImpl.model;
@@ -9,6 +8,7 @@ using System;
 using System.Windows;
 using BrushMedia = System.Windows.Media.Brush;
 using System.Windows.Media;
+using edc_popover_dotnet.injection;
 
 namespace edc_popover_dotnet.src.gui
 {
@@ -36,7 +36,9 @@ namespace edc_popover_dotnet.src.gui
 
         private void Init()
         {
-            Startup.ConfigureServices();
+            edcClientDotnet.Injection.Startup.ConfigureServices();
+            IServiceCollection services = edcClientDotnet.Injection.Startup.services;
+            Startup.ConfigureServices(services);
             edcHelpGui = Startup.serviceProvider.GetRequiredService<IEdcHelpGui>();
             edcClient = Startup.serviceProvider.GetRequiredService<IEdcClient>();
             edcDesktop = Startup.serviceProvider.GetRequiredService<IDesktopProcess>();

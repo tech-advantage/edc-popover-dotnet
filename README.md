@@ -34,18 +34,82 @@ We will be able to configure the url to get the documentation and the widget pro
 | Related topics display | ``SetRelatedTopicsDisplay`` | true | Enable the related topics |
 | Article display | ``SetArticleDisplay`` | true | Enable the article |
 
+### with injection
 
-### Config desktop viewer path
+Based on Microsoft DependencyInjection, you need to call the ConfigureServices method from edcClientDotnet, then get the services static variable of type IServiceCollection type from edcClientDotnet and set it to the ConfigureService method of edcPopoverDotnet. 
+```.NET
 
-If you want to use the desktop viewer, you should define the path
+String viewerDesktopPath = "";
+String viewerDesktopServerURL = "";
+String serverUrl = "https://demo.easydoccontents.com";
+
+edcClientDotnet.Injection.Startup.ConfigureServices();
+IServiceCollection services = edcClientDotnet.Injection.Startup.services;
+edc_popover_dotnet.injection.Startup.ConfigureServices(services);
+
+edcHelp = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IEdcHelpGui>();
+edcClient = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IEdcClient>();
+
+if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewerDesktopPath))
+{
+    edcDesktop = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
+    edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
+}
+else
+{
+    edcClient.SetServerUrl(serverUrl);
+}
+
+Example example = new Example(edcHelp);
+example.Configure();
 ```
-EdcHelpSingletonGui.GetInstance().SetHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
-EdcHelpSingletonGui.GetInstance().SetViewerDesktopPath("Define the path here");
+
+```.NET
+public class Example
+    {
+        private IEdcHelpGui help;
+
+        public Example(IEdcHelpGui help) { 
+            this.help = help;
+        }
+
+        public void Configure()
+        {
+            help.SetTooltipLabel("Help");
+            help.SetBackgroundColor(Brushes.White);
+            help.SetLanguageCode("en");
+            help.SetIconState(IconState.SHOWN);
+            help.SetSeparatorColor(Brushes.Red);
+            help.SetErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
+            help.SetHelpViewer(HelpViewer.SYSTEM_BROWSER);
+            help.SetIconDarkModePath("icons/icon2-32px.png");
+            help.SetIconPath("icons/icon-32px.png");
+            help.SetCloseIconPath("popover/close.png");
+        }
+    }
 ```
+
+### with Singleton
 
 To define the server url:  
 ```.NET
-EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl("https://demo.easydoccontents.com");
+String viewerDesktopPath = "";
+String viewerDesktopServerURL = "";
+String serverUrl = "https://demo.easydoccontents.com";
+
+edcHelp = EdcHelpSingletonGui.GetInstance();
+edcClient = EdcHelpSingletonGui.GetInstance().GetEdcClient();
+
+if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewerDesktopPath))
+{
+    edcDesktop = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
+    edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
+}
+else
+{
+    EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(serverUrl);
+}
+
 ```  
 
 To change the icon path and the default language
@@ -57,6 +121,19 @@ EdcHelpSingletonGui.GetInstance().SetPopoverDisplay(true);
 EdcHelpSingletonGui.GetInstance().SetBackgroundColor(Color.BLUE);
 EdcHelpSingletonGui.GetInstance().SetCloseIconPath("popover/close2.png");
 ```
+
+### Config desktop help viewer
+
+If you want to use the desktop viewer, you have to set the viewerDesktopPath and viewerDesktopServerURL :
+```.NET
+  String viewerDesktopPath = "Here the path of desktop help viewer";
+  String viewerDesktopServerURL = "Here the path of server desktop help viewer"; <--- Default server: http://localhost:60000
+```
+And replace to the help configuration HelpViewer.SYSTEM_BROWSER by HelpViewer.EDC_DESKTOP_VIEWER
+```.NET
+  EdcHelpSingletonGui.GetInstance().SetHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+```
+
 
 ## Add the contextual button
 

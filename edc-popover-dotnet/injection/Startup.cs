@@ -11,18 +11,16 @@ using System;
 using System.Windows;
 using edc_popover_dotnet.src.desktop;
 using edc_popover_dotnet.src.internalImpl.desktop;
+using edc_popover_dotnet.factory;
 
-namespace edc_popover_dotnet.factory
+namespace edc_popover_dotnet.injection
 {
     public static class Startup
     {
         public static IServiceProvider? serviceProvider;
 
-        public static void ConfigureServices()
+        public static void ConfigureServices(IServiceCollection services)
         {
-            edcClientDotnet.Injection.Startup.ConfigureServices();
-            var services = edcClientDotnet.Injection.Startup.services;
-            
             services.AddSingleton<IHelpConfiguration, HelpConfigurationImpl>();
             services.AddTransient<IContextualComponentBuilder<UIElement>, ContextualComponentBuilderImpl>();
             services.AddTransient<IContextualContentComponentBuilder<UIElement>, ContextualContentComponentBuilderImpl>();
@@ -31,7 +29,7 @@ namespace edc_popover_dotnet.factory
             services.AddSingleton<IEdcHelpGui, EdcHelpGuiImpl>();
             services.AddSingleton<IDesktopProcess, EdcDesktopProcess>();
             services.AddSingleton<Popover>();
-            services.AddScoped<OpenUrlAction>();  
+            services.AddScoped<OpenUrlAction>();
 
             serviceProvider = services.BuildServiceProvider();
         }

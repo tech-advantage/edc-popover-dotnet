@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace test_edc_popover_dotnet
+namespace edc_popover_dotnet_example_app
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

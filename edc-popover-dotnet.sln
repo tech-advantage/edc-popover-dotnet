@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "edc-popover-dotnet", "edc-popover-dotnet\edc-popover-dotnet.csproj", "{CE0B61E3-0D98-4719-B582-5339D809F360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-edc-popover-dotnet", "test-edc-popover-dotnet\test-edc-popover-dotnet.csproj", "{E941F4A2-4536-4954-9D01-DFFB931FD9AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edc-popover-dotnet-example-app", "edc-popover-dotnet-example-app\edc-popover-dotnet-example-app.csproj", "{E941F4A2-4536-4954-9D01-DFFB931FD9AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
