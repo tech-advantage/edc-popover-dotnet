@@ -1,5 +1,4 @@
 ﻿using edc_popover_dotnet.src.Gui;
-using edcClientDotnet;
 using System;
 using System.Diagnostics;
 
@@ -7,12 +6,6 @@ namespace edc_popover_dotnet.src.desktop
 {
     public interface IDesktopProcess
     {
-        /// <summary>
-        ///     Create process
-        /// </summary>
-        /// <param name="path"></param>
-        void CreateProcess(String path);
-
         /// <summary>
         ///     Get process
         /// </summary>
@@ -33,11 +26,11 @@ namespace edc_popover_dotnet.src.desktop
         /// <param name="edcClient"></param>
         /// <param name="appPath"></param>
         /// <param name="serverUrl"></param>
-        void ConfigureDesktopProcess(IEdcHelpGui edcHelp, IEdcClient edcClient, String appPath, String serverUrl);
+        void ConfigureDesktopProcess(IEdcHelpGui edcHelp, String appPath);
 
         /// <summary>
-        ///     Kill the process
+        ///     Kill the edc-desktop-viewer process
         /// </summary>
-        void KillProcess();
+        void KillDesktopViewer();
     }
 }

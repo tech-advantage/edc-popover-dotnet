@@ -33,6 +33,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Title | ``SetTitleDisplay`` | true | Display the title in the help dialog |
 | Related topics display | ``SetRelatedTopicsDisplay`` | true | Enable the related topics |
 | Article display | ``SetArticleDisplay`` | true | Enable the article |
+| HelpViewer | ``SetHelpViewer`` | SYSTEM_BROWSER | EDC_DESKTOP_VIEWER |
 
 ### with injection
 
@@ -40,8 +41,8 @@ Based on Microsoft DependencyInjection, you need to call the ConfigureServices m
 ```.NET
 
 String viewerDesktopPath = "";
-String viewerDesktopServerURL = "";
 String serverUrl = "https://demo.easydoccontents.com";
+
 
 edcClientDotnet.Injection.Startup.ConfigureServices();
 IServiceCollection services = edcClientDotnet.Injection.Startup.services;
@@ -94,7 +95,6 @@ public class Example
 To define the server url:  
 ```.NET
 String viewerDesktopPath = "";
-String viewerDesktopServerURL = "";
 String serverUrl = "https://demo.easydoccontents.com";
 
 edcHelp = EdcHelpSingletonGui.GetInstance();
@@ -127,7 +127,7 @@ EdcHelpSingletonGui.GetInstance().SetCloseIconPath("popover/close2.png");
 If you want to use the desktop viewer, you have to set the viewerDesktopPath and viewerDesktopServerURL :
 ```.NET
   String viewerDesktopPath = "Here the path of desktop help viewer";
-  String viewerDesktopServerURL = "Here the path of server desktop help viewer"; <--- Default server: http://localhost:60000
+  If you are using a custom server for the viewer desktop, set EdcHelpSingletonGui.GetInstance().SetViewerDesktopServerURL(Set the server url here); <--- Default server: http://localhost:60000
 ```
 And replace to the help configuration HelpViewer.SYSTEM_BROWSER by HelpViewer.EDC_DESKTOP_VIEWER
 ```.NET

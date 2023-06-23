@@ -22,13 +22,13 @@ namespace edc_popover_dotnet.src.internalImpl.gui
         private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public EdcHelpGuiImpl(
-            IEdcClient edc,
+            IEdcClient edcClient,
             IContextualComponentBuilder<UIElement> contextualComponentBuilder,
             IHelpConfiguration helpConfiguration,
             IHelpListenerFactory helpListenerFactory
         ) : base(helpConfiguration)
         {
-            this.edcClient = edc;
+            this.edcClient = edcClient;
             this.contextualComponentBuilder = contextualComponentBuilder;
             this.helpListenerFactory = helpListenerFactory;
         }
@@ -37,7 +37,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui
         {
             IHelpConfiguration helpConfiguration = GetHelpConfiguration();
             String languageCode = helpConfiguration.LanguageCode;
-
             try
             {
                 enableContextItem = edcClient.GetContextItem(mainKey, subKey, languageCode) != null;
@@ -67,7 +66,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui
         {
 
             IHelpConfiguration helpConfiguration = GetHelpConfiguration();
-
             return CreateComponent(mainKey, subKey, helpConfiguration.IconPath);
         }
 

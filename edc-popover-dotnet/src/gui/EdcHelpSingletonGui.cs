@@ -42,7 +42,6 @@ namespace edc_popover_dotnet.src.gui
             edcHelpGui = Startup.serviceProvider.GetRequiredService<IEdcHelpGui>();
             edcClient = Startup.serviceProvider.GetRequiredService<IEdcClient>();
             edcDesktop = Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
-
         }
 
         public IEdcClient GetEdcClient()

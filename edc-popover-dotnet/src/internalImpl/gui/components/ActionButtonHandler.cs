@@ -132,12 +132,8 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
         {
             try
             {
-                if (edcClient != null && helpConfiguration != null)
-                {
-                    IContextItem? contextItem = edcClient.GetContextItem(mainKey, subKey, helpConfiguration.LanguageCode);
-                }
-
-
+                IContextItem? contextItem = edcClient.GetContextItem(mainKey, subKey, helpConfiguration.LanguageCode);
+                
                 if (contextItem != null || helpConfiguration.ErrorBehavior != ErrorBehavior.NO_POPOVER)
                 {
                     UIElement bodyComponent = contextualContentComponentBuilder

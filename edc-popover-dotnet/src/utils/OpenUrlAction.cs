@@ -3,6 +3,7 @@ using NLog;
 using System;
 using System.Diagnostics;
 using RestSharp;
+using System.IO;
 
 namespace edc_popover_dotnet.src.utils
 {
@@ -21,14 +22,15 @@ namespace edc_popover_dotnet.src.utils
             if (helpConfiguration.HelpViewer == HelpViewer.EDC_DESKTOP_VIEWER)
             {
                 _logger.Debug("Open the url: {}", url);
+                
                 HandleDesktopPostRequest(url);
             }
             else if (helpConfiguration.HelpViewer == HelpViewer.SYSTEM_BROWSER)
             {
                 if (!String.IsNullOrEmpty(helpConfiguration.ViewerDesktopPath))
-                {
+                {                   
                     _logger.Error("Unable to open browser with this option, please change HelpViewer.SYSTEM_BROWSER option to HelpViewer.EDC_DESKTOP_VIEWER in application startup configuration settings.");
-                    return;
+                    throw new InvalidDataException("The viewerdesktoppath value is not empty, please remove its content if you want to use the browser to view the documentation");
                 }
                 var sInfo = new ProcessStartInfo(url)
                 {

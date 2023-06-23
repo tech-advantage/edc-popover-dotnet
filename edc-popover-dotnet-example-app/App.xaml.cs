@@ -1,4 +1,3 @@
-using edc_popover_dotnet.src.internalImpl.gui.tools;
 using edc_popover_dotnet.src.desktop;
 using edc_popover_dotnet.src.gui;
 using edc_popover_dotnet.src.Gui;
@@ -13,7 +12,6 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using edcClientDotnet;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace edc_popover_dotnet_example_app
 {
@@ -40,59 +38,47 @@ namespace edc_popover_dotnet_example_app
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            if (edcDesktop != null)
-            {
-                mainWindow.Closing += App_Exit;
-            }
             SetupGui(mainWindow);
+            mainWindow.Closing += App_Exit;
         }
 
         void App_Exit(object sender, CancelEventArgs e)
         {
-            edcDesktop.KillProcess();
+            if (edcDesktop != null)
+            {
+                edcDesktop.KillDesktopViewer();
+            }
         }
 
         private void SetupGui(Window mainWindow)
         {
             TextBlock titleApp = new();
-            String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
-            String viewerDesktopServerURL = "http://localhost:60000";
-            String serverUrl = "";
-
+            String viewerDesktopPath = "";
+            String serverUrl =  "https://demo.easydoccontents.com";
             
-
             edcHelp = EdcHelpSingletonGui.GetInstance();
             edcClient = EdcHelpSingletonGui.GetInstance().GetEdcClient();
 
-            if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewerDesktopPath))
+            if (!String.IsNullOrEmpty(viewerDesktopPath))
             {
                 edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
-                edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
+                edcDesktop.ConfigureDesktopProcess(edcHelp, viewerDesktopPath);
             }
-            else
-            {
-                edcClient.SetServerUrl(serverUrl);
-            }
-
-            EdcHelpSingletonGui.GetInstance().SetTooltipLabel("Help");
-            EdcHelpSingletonGui.GetInstance().SetRelatedTopicsDisplay(true);
-            EdcHelpSingletonGui.GetInstance().SetArticleDisplay(true);
-            EdcHelpSingletonGui.GetInstance().SetBackgroundColor(Brushes.White);
-            EdcHelpSingletonGui.GetInstance().SetTitleDisplay(true);
-            EdcHelpSingletonGui.GetInstance().SetLanguageCode(languageCode);
-            EdcHelpSingletonGui.GetInstance().SetSeparatorDisplay(true);
-            EdcHelpSingletonGui.GetInstance().SetIconState(IconState.SHOWN);
-            EdcHelpSingletonGui.GetInstance().SetDarkMode(false);
-            EdcHelpSingletonGui.GetInstance().SetSeparatorColor(Brushes.Red);
-            EdcHelpSingletonGui.GetInstance().SetErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
-            EdcHelpSingletonGui.GetInstance().SetPopoverDisplay(true);
-            EdcHelpSingletonGui.GetInstance().SetHoverDisplayPopover(true);
-            EdcHelpSingletonGui.GetInstance().SetPopoverPlacement(PopoverPlacement.TOP);
-            EdcHelpSingletonGui.GetInstance().SetHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
-            EdcHelpSingletonGui.GetInstance().SetPopoverSectionTitleFont(new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold));
-            EdcHelpSingletonGui.GetInstance().SetIconDarkModePath("icons/icon2-32px.png");
-            EdcHelpSingletonGui.GetInstance().SetIconPath("icons/icon-32px.png");
-            EdcHelpSingletonGui.GetInstance().SetCloseIconPath("popover/close.png");
+            
+            edcClient.SetServerUrl(serverUrl);
+            edcHelp.SetTooltipLabel("Help");
+            edcHelp.SetTitleDisplay(true);
+            edcHelp.SetSeparatorDisplay(true);
+            edcHelp.SetSeparatorColor(Brushes.Red);
+            edcHelp.SetBackgroundColor(Brushes.White);
+            edcHelp.SetPopoverDisplay(true);
+            edcHelp.SetHoverDisplayPopover(false);
+            edcHelp.SetIconState(IconState.SHOWN);
+            edcHelp.SetErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
+            edcHelp.SetTooltipDisplay(true);
+            edcHelp.SetCloseIconPath("popover/close.png");
+            edcHelp.SetHelpViewer(HelpViewer.SYSTEM_BROWSER);
+            edcHelp.SetLanguageCode(languageCode);
 
             /* Design app */
             /* Create the grid */
@@ -139,8 +125,8 @@ namespace edc_popover_dotnet_example_app
             langSelectorPanel.Children.Add(langSelect);
 
             WrapPanel wrapHelpIconPanel = new();
-            wrapHelpIconPanel.Children.Add(EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc.showcase.mailreader", "leftmenu.account"));
-            wrapHelpIconPanel.Children.Add(EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc", "help.center"));
+            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.configuration", "storehouses"));
+            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc", "help.center"));
 
             foreach (Button element in wrapHelpIconPanel.Children)
             {
@@ -155,7 +141,7 @@ namespace edc_popover_dotnet_example_app
                 VerticalAlignment = VerticalAlignment.Bottom
             };
 
-            IMouseListener mouseListener = EdcHelpSingletonGui.GetInstance().GetMouseListener("fr.techad.edc.configuration", "storehouses");
+            IMouseListener mouseListener = edcHelp.GetMouseListener("fr.techad.edc.configuration", "storehouses");
             Button helpButton = new Button();
 
             helpButton.VerticalAlignment = VerticalAlignment.Center;
@@ -208,7 +194,7 @@ namespace edc_popover_dotnet_example_app
 
             try
             {
-                EdcHelpSingletonGui.GetInstance().GetEdcClient().LoadContext();
+                edcClient.LoadContext();
             }
             catch (IOException ex)
             {
