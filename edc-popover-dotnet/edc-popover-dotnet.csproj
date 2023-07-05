@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>edc_popover_dotnet</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\icons\icon-32px.png" />
+    <None Remove="assets\icons\icon-48px.png" />
+    <None Remove="assets\icons\icon2-32px.png" />
+    <None Remove="assets\icons\icon_exclamation-32px.png" />
+    <None Remove="assets\popover\close.png" />
+    <None Remove="assets\popover\close1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\icons\icon-32px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\icon-48px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\icon2-32px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\icon_exclamation-32px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\popover\close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\popover\close1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.1" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="edc-client-dotnet">
+      <HintPath>..\..\..\..\Desktop\edc\edc-client-dotnet\edc-client-dotnet\bin\Debug\net6.0\edc-client-dotnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
