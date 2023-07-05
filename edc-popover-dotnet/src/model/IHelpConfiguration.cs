@@ -191,8 +191,35 @@ namespace edc_popover_dotnet.src.internalImpl.model
         ///     SET: Define the font attributes of the header title
         /// </summary>
         /// <returns>the font attributes of the header title</returns>
-        FontAttributes? HeaderTitleFontAttributes { get; set; }
+        FontAttributes? HeaderTitleFont { get; set; }
 
+        /// <summary>
+        ///     <para>GET: the popover links color</para>
+        ///     SET: Define the popover links color
+        /// </summary>
+        /// <returns>the popover links color</returns>
+        SolidColorBrush PopoverLinksColor { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the font attributes of the popover links</para>
+        ///     SET: Define the font attributes of the popover links
+        /// </summary>
+        /// <returns>the popover links fonts</returns>
+        FontAttributes PopoverLinksFont { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the font attributes of the popover description</para>
+        ///     SET: Define the font attributes of the popover description
+        /// </summary>
+        /// <returns>the popover description fonts</returns>
+        FontAttributes PopoverDescriptionFont { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the header title color</para>
+        ///     SET: Define the header title color
+        /// </summary>
+        /// <returns>the popover description color</returns>
+        SolidColorBrush PopoverDescriptionColor { get; set; }
 
         /// <summary>
         ///     <para>GET: the header title color</para>

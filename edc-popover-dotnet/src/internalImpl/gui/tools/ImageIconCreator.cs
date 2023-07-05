@@ -1,7 +1,6 @@
 ﻿using edc_popover_dotnet.src.internalImpl.model;
 using NLog;
 using System;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -28,7 +27,8 @@ namespace edc_popover_dotnet.src.internalImpl.gui.tools
 
         public Image CreateImageIcon(String? path, Stretch? stretch)
         {
-            BitmapImage imageIconBMI = new BitmapImage(new Uri(@"assets\" + path, UriKind.RelativeOrAbsolute));
+    
+            BitmapImage imageIconBMI = new BitmapImage(new Uri("pack://application:,,,/edc-popover-dotnet;component/assets/" + path, UriKind.RelativeOrAbsolute));
             if (stretch != Stretch.None)
             {
                 this.Stretch = Stretch.Uniform;

@@ -86,9 +86,14 @@ namespace edc_popover_dotnet.src.internalImpl.gui
             GetHelpConfiguration().SeparatorColor = separatorColor;
         }
 
-        public void SetHeaderTitleFontAttributes(FontAttributes fontAttr)
+        public void ViewerDesktopServerURL(string host)
         {
-            GetHelpConfiguration().HeaderTitleFontAttributes = fontAttr;
+            GetHelpConfiguration().ViewerDesktopServerUrl = host;
+        }
+
+        public void SetPopoverSectionTitleFont(FontAttributes fontAttr)
+        {
+            GetHelpConfiguration().PopoverSectionTitleFont = fontAttr;
         }
 
         public void SetPopoverSectionTitleColor(SolidColorBrush titleColor)
@@ -96,19 +101,34 @@ namespace edc_popover_dotnet.src.internalImpl.gui
             GetHelpConfiguration().PopoverSectionTitleColor = titleColor;
         }
 
-        public void ViewerDesktopServerURL(string host)
-        {
-            GetHelpConfiguration().ViewerDesktopServerUrl = host;
-        }
-
-        public void PopoverSectionTitleFont(FontAttributes fontAttr)
-        {
-            GetHelpConfiguration().PopoverSectionTitleFont = fontAttr;
-        }
-
         public void SetHeaderTitleColor(SolidColorBrush titleColor)
         {
             GetHelpConfiguration().HeaderTitleColor = titleColor;
+        }
+
+        public void SetHeaderTitleFont(FontAttributes fontAttr)
+        {
+            GetHelpConfiguration().HeaderTitleFont = fontAttr;
+        }
+
+        public void SetPopoverLinksColor(SolidColorBrush linksColor)
+        {
+            GetHelpConfiguration().PopoverLinksColor = linksColor;
+        }
+
+        public void SetPopoverLinksFont(FontAttributes fontAttr)
+        {
+            GetHelpConfiguration().PopoverLinksFont = fontAttr;
+        }
+
+        public void SetPopoverDescriptionColor(SolidColorBrush descColor)
+        {
+            GetHelpConfiguration().PopoverDescriptionColor = descColor;
+        }
+
+        public void SetPopoverDescriptionFont(FontAttributes fontAttr)
+        {
+            GetHelpConfiguration().PopoverDescriptionFont = fontAttr;
         }
     }
 }

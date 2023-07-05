@@ -35,7 +35,7 @@ namespace edc_popover_dotnet.src.builder
         /// </summary>
         /// <param name="fontAttr"></param>
         /// <returns>the builder</returns>
-        IContextualTitleComponentBuilder<T> SetHeaderFontAttributes(FontAttributes fontAttr);
+        IContextualTitleComponentBuilder<T> SetHeaderTitleFont(FontAttributes fontAttr);
 
         /// <summary>
         ///     Show the title
@@ -58,8 +58,18 @@ namespace edc_popover_dotnet.src.builder
         /// <returns>the builder</returns>
         IContextualTitleComponentBuilder<T> SetLanguageCode(String languageCode);
 
+        /// <summary>
+        ///     Define if is enable or not
+        /// </summary>
+        /// <param name="enable"></param>
+        /// <returns></returns>
         IContextualTitleComponentBuilder<T> SetRectangleSeparator(bool enable);
 
+        /// <summary>
+        ///     Define the color of separator
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         IContextualTitleComponentBuilder<T> SetRectangleSeparatorColor(Brush color);
 
         /// <summary>

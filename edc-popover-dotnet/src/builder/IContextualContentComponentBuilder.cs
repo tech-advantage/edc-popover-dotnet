@@ -45,7 +45,7 @@ namespace edc_popover_dotnet.src.builder
         IContextualContentComponentBuilder<T> EnableRelatedTopics(Boolean enable);
 
         /// <summary>
-        ///     Define the article title color
+        ///     Define the section title color
         /// </summary>
         /// <param name="titleColor">the title color</param>
         /// <returns>the builder</returns>
@@ -57,6 +57,34 @@ namespace edc_popover_dotnet.src.builder
         /// <param name="fontAttr">the font attribute</param>
         /// <returns>the builder</returns>
         IContextualContentComponentBuilder<T> SetPopoverSectionTitleFont(FontAttributes fontAttr);
+
+        /// <summary>
+        ///     Define the Popover links color
+        /// </summary>
+        /// <param name="linksColor"></param>
+        /// <returns></returns>
+        IContextualContentComponentBuilder<T> SetPopoverLinksColor(SolidColorBrush linksColor);
+
+        /// <summary>
+        ///     Define the font attributes of Popover links
+        /// </summary>
+        /// <param name="fontAttr"></param>
+        /// <returns></returns>
+        IContextualContentComponentBuilder<T> SetPopoverLinksFont(FontAttributes fontAttr);
+
+        /// <summary>
+        ///     Define the Popover description color
+        /// </summary>
+        /// <param name="descColor"></param>
+        /// <returns></returns>
+        IContextualContentComponentBuilder<T> SetPopoverDescriptionColor(SolidColorBrush descColor);
+
+        /// <summary>
+        ///     Define the font attributes of Popover description
+        /// </summary>
+        /// <param name="fontAttr"></param>
+        /// <returns></returns>
+        IContextualContentComponentBuilder<T> SetPopoverDescriptionFont(FontAttributes fontAttr);
 
         /// <summary>
         ///     Enable the article display

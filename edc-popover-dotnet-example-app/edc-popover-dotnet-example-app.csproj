@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <PackageReference Include="ImageProcessor" Version="2.9.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup>

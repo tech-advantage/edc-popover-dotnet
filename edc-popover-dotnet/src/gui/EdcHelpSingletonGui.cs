@@ -84,10 +84,21 @@ namespace edc_popover_dotnet.src.gui
             edcHelpGui.SetErrorIconPath(iconPath);
         }
 
-        public void SetHeaderTitleFontAttributes(FontAttributes fontAttr)
+        public void SetHeaderTitleFont(FontAttributes fontAttr)
         {
-            edcHelpGui.SetHeaderTitleFontAttributes(fontAttr);
+            edcHelpGui.SetHeaderTitleFont(fontAttr);
         }
+
+        public void SetPopoverLinksColor(SolidColorBrush linkColor) { edcHelpGui.SetPopoverLinksColor(linkColor); }
+
+       
+        public void SetPopoverLinksFont(FontAttributes fontAttr) { edcHelpGui.SetPopoverLinksFont(fontAttr); }
+
+    
+        public void SetPopoverDescriptionColor(SolidColorBrush descColor) { edcHelpGui.SetPopoverDescriptionColor(descColor); }
+
+       
+        public void SetPopoverDescriptionFont(FontAttributes fontAttr) { edcHelpGui.SetPopoverDescriptionFont(fontAttr); }
 
         public void SetHoverDisplayPopover(bool enable)
         {

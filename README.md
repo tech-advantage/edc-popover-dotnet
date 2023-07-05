@@ -20,11 +20,16 @@ We will be able to configure the url to get the documentation and the widget pro
 | Popover Help | ``SetPopoverDisplay`` | false | Display the help summary dialog |
 | Hover display popover | ``SetHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
 | Separator | ``SetSeparatorDisplay`` | true | Display the separator in the help header |
-| Header title color | ``SetHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Background color | ``SetBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``SetSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
-| Font attributes | ``SetPopoverSectionTitleFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of the popover section title |
-| Title color | ``SetPopoverSectionTitleColor`` | BLACK | Color of the popover section title in the help dialog |
+| Font attributes | ``SetHeaderTitleFontAttributes`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of Popover main title in the header of the help dialog |
+| Header title color | ``SetHeaderTitleColor`` | BLACK | Color of Popover main title in the header of the help dialog |
+| Font attributes | ``SetPopoverDescriptionFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of Popover description of the help dialog |
+| Popover description color | ``SetPopoverDescriptionColor`` | BLACK | Color of Popover description of the help dialog |
+| Font attributes | ``SetPopoverSectionTitleFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of the popover section title ("Need more" | "Related topics") in the help dialog |
+| Title color | ``SetPopoverSectionTitleColor`` | BLACK | Color of the popover section title ("Need more" & "Related topics") in the help dialog |
+| Font attributes | ``SetPopoverLinksFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Normal) | Font attributes of Popover links of the help dialog |
+| Popover links color | ``SetPopoverLinksColor`` | BLUE | Color of Popover links of the help dialog |
 | Close Icon | ``SetCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Error Icon | ``SetErrorIconPath`` | icons/icon_exclamation-32px.png | The error icon displays in the component |
 | Popover placement | ``SetPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
@@ -41,6 +46,8 @@ Based on Microsoft DependencyInjection, you need to call the ConfigureServices m
 ```.NET
 
 String viewerDesktopPath = "";
+
+HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
 String serverUrl = "https://demo.easydoccontents.com";
 
 
@@ -56,10 +63,8 @@ if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewe
     edcDesktop = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
     edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
 }
-else
-{
-    edcClient.SetServerUrl(serverUrl);
-}
+
+edcClient.SetServerUrl(serverUrl);
 
 Example example = new Example(edcHelp);
 example.Configure();
@@ -95,6 +100,8 @@ public class Example
 To define the server url:  
 ```.NET
 String viewerDesktopPath = "";
+
+HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
 String serverUrl = "https://demo.easydoccontents.com";
 
 edcHelp = EdcHelpSingletonGui.GetInstance();
@@ -105,10 +112,8 @@ if (!String.IsNullOrEmpty(viewerDesktopServerURL) && !String.IsNullOrEmpty(viewe
     edcDesktop = edc_popover_dotnet.injection.Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
     edcDesktop.ConfigureDesktopProcess(edcHelp, edcClient, viewerDesktopPath, viewerDesktopServerURL);
 }
-else
-{
-    EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(serverUrl);
-}
+
+EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(serverUrl);
 
 ```  
 
@@ -161,6 +166,21 @@ Get the instance of ``EdcHelpSingletonGui`` and call the method ``CreateComponen
 ```.NET
 EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc", "help.center", "popover/close1.png");
 ```
+
+## Fail behavior
+You can customize the popover's behavior when an error occurs with the following property:
+ - `SHOWN` The help icon is shown as usual
+ - `DISABLED` The help icon is greyed out
+ - `HIDDEN` The help icon is completely hidden
+ - `ERROR` The help icon is replaced by an exclamation point
+
+For the popover when an error occurs:
+ - `ERROR_SHOWN` An error message is shown in the popover
+ - `FRIENDLY_MSG` A friendly and translated message is shown in the popover
+ - `NO_POPOVER` No popover appears when the help icon is triggered
+
+By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
+
 
 ## Language selection
 You can set the language for the content and the popover labels by calling the method ``SetLanguageCode`` (see the Example section below).

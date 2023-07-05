@@ -33,10 +33,13 @@ namespace edc_popover_dotnet.src.internalImpl.model
         private Brush separatorColor = Brushes.Red;
         private HelpViewer helpViewer;
         private String desktopViewerPath = "";
-        private FontAttributes headerTitleFontAttr = new(new FontFamily("Dialog"), 20, FontWeights.Bold);
+        private FontAttributes headerTitleFont = new(new FontFamily("Dialog"), 20, FontWeights.Bold);
         private SolidColorBrush titleColor = new SolidColorBrush(Colors.Black);
+        private SolidColorBrush popoverLinksColor = new SolidColorBrush(Colors.Blue);
+        private FontAttributes popoverLinksFont = new(new FontFamily("Arial"), 12, FontWeights.Normal);
+        private SolidColorBrush popoverDescriptionColor = new SolidColorBrush(Colors.Black);
+        private FontAttributes popoverDescriptionFont = new(new FontFamily("Arial"), 12, FontWeights.Normal);
         private String viewerDesktopServerURL = "http://localhost:60000";
-
 
         public HelpConfigurationImpl()
         {
@@ -63,7 +66,7 @@ namespace edc_popover_dotnet.src.internalImpl.model
         public bool DarkMode { get => darkMode; set => darkMode = value; }
         public FontAttributes PopoverSectionTitleFont { get => popoverSectionTitleFont; set => popoverSectionTitleFont = value; }
         public SolidColorBrush PopoverSectionTitleColor { get => popoverSectionTitleColor; set => popoverSectionTitleColor = value; }
-        public FontAttributes HeaderTitleFontAttributes { get => headerTitleFontAttr; set => headerTitleFontAttr = value; }
+        public FontAttributes HeaderTitleFont { get => headerTitleFont; set => headerTitleFont = value; }
         public SolidColorBrush HeaderTitleColor { get => titleColor; set => titleColor = value; }
         public BrushMedia BackgroundColor { get => backgroundColor; set => backgroundColor = value; }
         public string ViewerDesktopServerUrl { get => viewerDesktopServerURL; set => viewerDesktopServerURL = value; }
@@ -73,5 +76,9 @@ namespace edc_popover_dotnet.src.internalImpl.model
         public bool ShowSeparator { get => showSeparator; set => showSeparator = value; }
         public bool ShowTooltip { get => showTooltip; set => showTooltip = value; }
         public bool ShowTitle { get => showTitle; set => showTitle = value; }
+        public SolidColorBrush PopoverLinksColor { get => popoverLinksColor; set => popoverLinksColor = value; }
+        public FontAttributes PopoverLinksFont { get => popoverLinksFont; set => popoverLinksFont = value; }
+        public FontAttributes PopoverDescriptionFont { get => popoverDescriptionFont; set => popoverDescriptionFont = value; }
+        public SolidColorBrush PopoverDescriptionColor { get => popoverDescriptionColor; set => popoverDescriptionColor = value; }
     }
 }

@@ -54,32 +54,39 @@ namespace edc_popover_dotnet_example_app
         {
             TextBlock titleApp = new();
             String viewerDesktopPath = "";
+            HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
             String serverUrl =  "https://demo.easydoccontents.com";
             
             edcHelp = EdcHelpSingletonGui.GetInstance();
             edcClient = EdcHelpSingletonGui.GetInstance().GetEdcClient();
 
-            if (!String.IsNullOrEmpty(viewerDesktopPath))
+            if (!String.IsNullOrEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER)
             {
                 edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
                 edcDesktop.ConfigureDesktopProcess(edcHelp, viewerDesktopPath);
             }
             
             edcClient.SetServerUrl(serverUrl);
-            edcHelp.SetTooltipLabel("Help");
+            edcHelp.SetTooltipLabel("Help me");
             edcHelp.SetTitleDisplay(true);
             edcHelp.SetSeparatorDisplay(true);
-            edcHelp.SetSeparatorColor(Brushes.Red);
             edcHelp.SetBackgroundColor(Brushes.White);
             edcHelp.SetPopoverDisplay(true);
             edcHelp.SetHoverDisplayPopover(false);
             edcHelp.SetIconState(IconState.SHOWN);
             edcHelp.SetErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
             edcHelp.SetTooltipDisplay(true);
-            edcHelp.SetCloseIconPath("popover/close.png");
-            edcHelp.SetHelpViewer(HelpViewer.SYSTEM_BROWSER);
+            edcHelp.SetIconPath("icons/icon-32px.png");
+            edcHelp.SetPopoverSectionTitleColor(Brushes.Blue);
+            edcHelp.SetHeaderTitleColor(Brushes.Red);
+            edcHelp.SetRelatedTopicsDisplay(true);
+            edcHelp.SetArticleDisplay(true);
+            edcHelp.SetHelpViewer(helpViewerMode);
             edcHelp.SetLanguageCode(languageCode);
-
+            edcHelp.SetDarkMode(false);
+            edcHelp.SetIconDarkModePath("icons/icon2-32px.png");
+            edcHelp.SetCloseIconPath("popover/close.png");            
+            
             /* Design app */
             /* Create the grid */
             Grid mainGrid = new();
@@ -123,11 +130,12 @@ namespace edc_popover_dotnet_example_app
             langSelectorPanel.HorizontalAlignment = HorizontalAlignment.Center;
             langSelectorPanel.VerticalAlignment = VerticalAlignment.Top;
             langSelectorPanel.Children.Add(langSelect);
-
+            
             WrapPanel wrapHelpIconPanel = new();
             wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.configuration", "storehouses"));
-            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc", "help.center"));
-
+            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.showcase.external", "external.header"));
+            
+            
             foreach (Button element in wrapHelpIconPanel.Children)
             {
                 element.HorizontalAlignment = HorizontalAlignment.Center;
@@ -141,7 +149,7 @@ namespace edc_popover_dotnet_example_app
                 VerticalAlignment = VerticalAlignment.Bottom
             };
 
-            IMouseListener mouseListener = edcHelp.GetMouseListener("fr.techad.edc.configuration", "storehouses");
+            IMouseListener mouseListener = edcHelp.GetMouseListener("fr.techad.edc.showcase.external", "external.header");
             Button helpButton = new Button();
 
             helpButton.VerticalAlignment = VerticalAlignment.Center;

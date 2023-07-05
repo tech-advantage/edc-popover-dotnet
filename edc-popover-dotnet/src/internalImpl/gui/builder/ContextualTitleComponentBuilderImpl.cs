@@ -25,7 +25,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
         private String languageCode = "en";
         private String errorTitle = "Error";
         private SolidColorBrush titleColor = new SolidColorBrush(Colors.Black);
-        private FontAttributes? headerTitleFontAttributes;
+        private FontAttributes? headerTitleFont;
         private bool rectangleSeparator = true;
         private Brush rectangleSeparatorColor = Brushes.Red;
         private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -64,9 +64,9 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             return this;
         }
 
-        public IContextualTitleComponentBuilder<UIElement> SetHeaderFontAttributes(FontAttributes fontAttr)
+        public IContextualTitleComponentBuilder<UIElement> SetHeaderTitleFont(FontAttributes fontAttr)
         {
-            this.headerTitleFontAttributes = fontAttr;
+            this.headerTitleFont = fontAttr;
             _logger.Debug("Set Header Font Attributes: {}", fontAttr);
             return this;
         }
@@ -158,11 +158,11 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
                     titleLabel.Content = contextItem.Label;
                 }
 
-                if (headerTitleFontAttributes != null)
+                if (headerTitleFont != null)
                 {
-                    titleLabel.FontFamily = headerTitleFontAttributes.FontFamily;
-                    titleLabel.FontWeight = headerTitleFontAttributes.FontWeight;
-                    titleLabel.FontSize = headerTitleFontAttributes.FontSize;
+                    titleLabel.FontFamily = headerTitleFont.FontFamily;
+                    titleLabel.FontWeight = headerTitleFont.FontWeight;
+                    titleLabel.FontSize = headerTitleFont.FontSize;
                 }
                 titleLabel.Foreground = titleColor;
             }
@@ -174,5 +174,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             _logger.Debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
             return this.edcClient.GetLabel(key, languageCode, publicationId);
         }
+
     }
 }

@@ -34,6 +34,10 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
         private bool enableRelatedTopics = true;
         private SolidColorBrush popoverSectionTitleColor = new SolidColorBrush(Colors.Black);
         private FontAttributes popoverSectionTitleFont = new(new FontFamilyMedia("Arial"), 12, FontWeights.Bold);
+        private SolidColorBrush popoverLinksColor = new SolidColorBrush(Colors.Blue);
+        private FontAttributes popoverLinksFont = new(new FontFamilyMedia("Arial"), 12, FontWeights.Normal);
+        private SolidColorBrush popoverDescriptionColor = new SolidColorBrush(Colors.Black);
+        private FontAttributes popoverDescriptionFont = new(new FontFamilyMedia("Arial"), 12, FontWeights.Normal);
         private bool enableArticle = true;
         private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -113,6 +117,34 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             return this.edcClient.GetError(key, languageCode, publicationId);
         }
 
+        public IContextualContentComponentBuilder<UIElement> SetPopoverLinksColor(SolidColorBrush linksColor)
+        {
+            this.popoverLinksColor = linksColor;
+            _logger.Debug("Set Popover links color: {}", linksColor);
+            return this;
+        }
+
+        public IContextualContentComponentBuilder<UIElement> SetPopoverLinksFont(FontAttributes fontAttr)
+        {
+            this.popoverLinksFont = fontAttr;
+            _logger.Debug("Set Popover links Font: {}", popoverLinksFont);
+            return this;
+        }
+
+        public IContextualContentComponentBuilder<UIElement> SetPopoverDescriptionColor(SolidColorBrush descColor)
+        {
+            this.popoverDescriptionColor = descColor;
+            _logger.Debug("Set Popover description color: {}", popoverDescriptionColor);
+            return this;
+        }
+
+        public IContextualContentComponentBuilder<UIElement> SetPopoverDescriptionFont(FontAttributes fontAttr)
+        {
+            this.popoverDescriptionFont = fontAttr;
+            _logger.Debug("Set Popover description Font: {}", popoverDescriptionFont);
+            return this;
+        }
+
         public UIElement Build()
         {
             _logger.Debug("Build the context item: {}", contextItem != null ? contextItem.Label : "null");
@@ -155,6 +187,10 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             if (contextItem != null)
             {
                 label.Content = contextItem.Description;
+                label.Foreground = popoverDescriptionColor;
+                label.FontFamily = popoverDescriptionFont.FontFamily;
+                label.FontSize = popoverDescriptionFont.FontSize;
+                label.FontWeight = popoverDescriptionFont.FontWeight;
             }
             return label;
         }
@@ -179,8 +215,11 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             Hyperlink hyperl = new(run1);
             linkText.BorderThickness = new Thickness(0, 0, 0, 0);
             linkText.Margin = new Thickness(0, 6, 0, 0);
-
-            linkText.Background = this.backgroundColor;
+            linkText.Foreground = popoverLinksColor;
+            linkText.Background = backgroundColor;
+            linkText.FontFamily = popoverLinksFont.FontFamily;
+            linkText.FontSize = popoverLinksFont.FontSize;
+            linkText.FontWeight = popoverLinksFont.FontWeight;
             linkText.BorderBrush = Brushes.Transparent;
             linkText.Content = hyperl;
             linkText.HorizontalAlignment = HorizontalAlignment.Left;
@@ -211,12 +250,13 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
                     Label title = new()
                     {
                         Content = GetLabel(ParseEnumDescription.GetDescription(I18NTranslation.ARTICLES_KEY), contextItem.LanguageCode, contextItem.PublicationId),
+                        Foreground = popoverSectionTitleColor,
                         FontFamily = popoverSectionTitleFont.FontFamily,
                         FontSize = popoverSectionTitleFont.FontSize,
                         FontWeight = popoverSectionTitleFont.FontWeight
                     };
                     articlePanel.Children.Add(title);
-                    StackPanel articleContentPanel = new() { Margin = new Thickness(10, -6, 0, 0) };
+                    StackPanel articleContentPanel = new() { Margin = new Thickness(10, -6, 0, 6) };
                     articlePanel.Children.Add(articleContentPanel);
 
                     int i = 0;
@@ -234,12 +274,13 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
                 {
                     StackPanel linkPanel = new()
                     {
-                        Margin = new Thickness(0, 10, 0, 0),
+                        Margin = new Thickness(0, 5, 0, 0),
                         Background = this.backgroundColor
                     };
 
                     Label title = new()
                     {
+                        Foreground = popoverSectionTitleColor,
                         FontFamily = popoverSectionTitleFont.FontFamily,
                         FontSize = popoverSectionTitleFont.FontSize,
                         FontWeight = popoverSectionTitleFont.FontWeight,
@@ -305,6 +346,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             return titleLabel;
         }
 
-
+        
     }
 }

@@ -143,6 +143,10 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                             .SetLanguageCode(helpConfiguration.LanguageCode)
                             .SetPopoverSectionTitleColor(helpConfiguration.PopoverSectionTitleColor)
                             .SetPopoverSectionTitleFont(helpConfiguration.PopoverSectionTitleFont)
+                            .SetPopoverLinksColor(helpConfiguration.PopoverLinksColor)
+                            .SetPopoverLinksFont(helpConfiguration.PopoverLinksFont)
+                            .SetPopoverDescriptionColor(helpConfiguration.PopoverDescriptionColor)
+                            .SetPopoverDescriptionFont(helpConfiguration.PopoverDescriptionFont)
                             .EnableArticle(helpConfiguration.ShowArticle)
                             .EnableRelatedTopics(helpConfiguration.ShowRelatedTopics)
                             .Build();
@@ -150,7 +154,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                             .SetContextItem(contextItem)
                             .SetBackgroundColor(new SolidColorBrush(((SolidColorBrush)helpConfiguration.BackgroundColor).Color))
                             .SetLanguageCode(helpConfiguration.LanguageCode)
-                            .SetHeaderFontAttributes(helpConfiguration.HeaderTitleFontAttributes)
+                            .SetHeaderTitleFont(helpConfiguration.HeaderTitleFont)
                             .SetShowTitle(helpConfiguration.ShowTitle)
                             .SetHeaderTitleColor(helpConfiguration.HeaderTitleColor)
                             .SetRectangleSeparator(helpConfiguration.ShowSeparator)
@@ -195,6 +199,5 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                 _logger.Error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, helpConfiguration.LanguageCode);
             }
         }
-        
     }
 }

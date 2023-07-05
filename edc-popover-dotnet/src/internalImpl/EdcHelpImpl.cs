@@ -1,6 +1,4 @@
-﻿using edc_popover_dotnet.src.internalImpl.gui.tools;
-using edc_popover_dotnet.src.internalImpl.model;
-using System.Windows.Media;
+﻿using edc_popover_dotnet.src.internalImpl.model;
 
 namespace edc_popover_dotnet.src.internalImpl
 {
@@ -36,11 +34,6 @@ namespace edc_popover_dotnet.src.internalImpl
         public void SetErrorIconPath(string iconPath)
         {
             helpConfiguration.ErrorIconPath = iconPath;
-        }
-
-        public void SetHeaderTitleFontAttributes(FontAttributes fontAttr)
-        {
-            helpConfiguration.HeaderTitleFontAttributes = fontAttr;
         }
 
         public void SetHelpViewer(HelpViewer viewer)
@@ -83,19 +76,9 @@ namespace edc_popover_dotnet.src.internalImpl
             helpConfiguration.PopoverPlacement = popoverPlacement;
         }
 
-        public void SetPopoverSectionTitleFont(FontAttributes fontAttr)
-        {
-            helpConfiguration.PopoverSectionTitleFont = fontAttr;
-        }
-
         public void SetRelatedTopicsDisplay(bool enable)
         {
             helpConfiguration.ShowRelatedTopics = enable;
-        }
-
-        public void SetSeparatorColor(Brush color)
-        {
-            helpConfiguration.SeparatorColor = color;
         }
 
         public void SetSeparatorDisplay(bool enable)

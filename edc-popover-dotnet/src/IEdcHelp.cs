@@ -46,8 +46,6 @@ namespace edc_popover_dotnet.src
 
         void SetRelatedTopicsDisplay(Boolean enable);
 
-        void SetPopoverSectionTitleFont(FontAttributes fontAttr);
-
         void SetArticleDisplay(Boolean enable);
     }
 }
