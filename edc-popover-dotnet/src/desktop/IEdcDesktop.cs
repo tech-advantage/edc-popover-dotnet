@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace edc_popover_dotnet.src.desktop
 {
-    public interface IDesktopProcess
+    public interface IEdcDesktop
     {
         /// <summary>
         ///     Get process
@@ -29,8 +29,8 @@ namespace edc_popover_dotnet.src.desktop
         void ConfigureDesktopProcess(IEdcHelpGui edcHelp, String appPath);
 
         /// <summary>
-        ///     Kill the edc-desktop-viewer process
+        ///     Shutdown the edc-desktop-viewer process
         /// </summary>
-        void KillDesktopViewer();
+        void ShutDownDesktopViewer();
     }
 }

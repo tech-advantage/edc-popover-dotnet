@@ -2,7 +2,6 @@
 using NLog;
 using System;
 using System.Diagnostics;
-using RestSharp;
 using System.IO;
 
 namespace edc_popover_dotnet.src.utils
@@ -10,11 +9,13 @@ namespace edc_popover_dotnet.src.utils
     public class OpenUrlAction
     {
         private readonly IHelpConfiguration helpConfiguration;
+        private readonly IHttpRestRequest httpRestRequest;
         private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public OpenUrlAction(IHelpConfiguration helpConfiguration) : base()
+        public OpenUrlAction(IHelpConfiguration helpConfiguration, IHttpRestRequest httpRestRequest) : base()
         {
             this.helpConfiguration = helpConfiguration;
+            this.httpRestRequest = httpRestRequest;
         }
 
         public void OpenUrl(String url)
@@ -22,8 +23,7 @@ namespace edc_popover_dotnet.src.utils
             if (helpConfiguration.HelpViewer == HelpViewer.EDC_DESKTOP_VIEWER)
             {
                 _logger.Debug("Open the url: {}", url);
-                
-                HandleDesktopPostRequest(url);
+                httpRestRequest.PostData(helpConfiguration.ViewerDesktopServerUrl, "api/helpviewer", "{\"url\":\"" + url + "\"}");
             }
             else if (helpConfiguration.HelpViewer == HelpViewer.SYSTEM_BROWSER)
             {
@@ -42,13 +42,6 @@ namespace edc_popover_dotnet.src.utils
             {
                 return;
             }
-        }
-
-        public void HandleDesktopPostRequest(String url)
-        {
-            RestClient client = new RestClient(helpConfiguration.ViewerDesktopServerUrl);
-            RestRequest request = new RestRequest("api/helpviewer").AddJsonBody("{\"url\":\"" + url + "\"}");
-            client.Post(request);
         }
     }
 }

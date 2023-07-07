@@ -2,16 +2,11 @@
 using edc_popover_dotnet.src.builder;
 using edc_popover_dotnet.src.components;
 using edc_popover_dotnet.src.gui;
-using edc_popover_dotnet.src.internalImpl.gui.components;
 using edc_popover_dotnet.src.internalImpl.gui.tools;
 using edc_popover_dotnet.src.internalImpl.model;
-using edc_popover_dotnet.src.utils;
-using edcClientDotnet;
 using NLog;
 using System;
-using System.Diagnostics;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace edc_popover_dotnet.src.internalImpl.gui.builder

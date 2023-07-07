@@ -139,6 +139,20 @@ namespace edc_popover_dotnet.src.internalImpl.model
         String ViewerDesktopServerUrl { get; set; }
 
         /// <summary>
+        ///     <para>GET: the viewer desktop window width</para>
+        ///     SET: viewer desktop window width
+        /// </summary>
+        /// <returns>the viewer desktop window width</returns>
+        int ViewerDesktopWidth { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the viewer desktop window height</para>
+        ///     SET: viewer desktop window height
+        /// </summary>
+        /// <returns>the viewer desktop window height</returns>
+        int ViewerDesktopHeight { get; set; }
+
+        /// <summary>
         ///     <para>GET: the selected Popover placement between : TOP, RIGHT, BOTTOM, LEFT</para>
         ///     SET: Define the Popover placement
         /// </summary>

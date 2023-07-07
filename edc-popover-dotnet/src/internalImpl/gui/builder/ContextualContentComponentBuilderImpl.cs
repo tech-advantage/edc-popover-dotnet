@@ -345,7 +345,5 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
 
             return titleLabel;
         }
-
-        
     }
 }

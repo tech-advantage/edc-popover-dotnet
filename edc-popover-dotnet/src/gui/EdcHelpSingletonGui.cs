@@ -20,7 +20,7 @@ namespace edc_popover_dotnet.src.gui
 
         private IEdcClient edcClient;
 
-        private IDesktopProcess edcDesktop;
+        private IEdcDesktop edcDesktop;
 
         private EdcHelpSingletonGui() : base() { }
 
@@ -41,7 +41,7 @@ namespace edc_popover_dotnet.src.gui
             Startup.ConfigureServices(services);
             edcHelpGui = Startup.serviceProvider.GetRequiredService<IEdcHelpGui>();
             edcClient = Startup.serviceProvider.GetRequiredService<IEdcClient>();
-            edcDesktop = Startup.serviceProvider.GetRequiredService<IDesktopProcess>();
+            edcDesktop = Startup.serviceProvider.GetRequiredService<IEdcDesktop>();
         }
 
         public IEdcClient GetEdcClient()
@@ -49,7 +49,7 @@ namespace edc_popover_dotnet.src.gui
             return this.edcClient;
         }
 
-        public IDesktopProcess GetEdcDesktop()
+        public IEdcDesktop GetEdcDesktop()
         {
             return this.edcDesktop;
         }
@@ -89,16 +89,25 @@ namespace edc_popover_dotnet.src.gui
             edcHelpGui.SetHeaderTitleFont(fontAttr);
         }
 
-        public void SetPopoverLinksColor(SolidColorBrush linkColor) { edcHelpGui.SetPopoverLinksColor(linkColor); }
+        public void SetPopoverLinksColor(SolidColorBrush linkColor) 
+        { 
+            edcHelpGui.SetPopoverLinksColor(linkColor); 
+        }
 
-       
-        public void SetPopoverLinksFont(FontAttributes fontAttr) { edcHelpGui.SetPopoverLinksFont(fontAttr); }
+        public void SetPopoverLinksFont(FontAttributes fontAttr) 
+        { 
+            edcHelpGui.SetPopoverLinksFont(fontAttr); 
+        }
 
-    
-        public void SetPopoverDescriptionColor(SolidColorBrush descColor) { edcHelpGui.SetPopoverDescriptionColor(descColor); }
+        public void SetPopoverDescriptionColor(SolidColorBrush descColor) 
+        {
+            edcHelpGui.SetPopoverDescriptionColor(descColor); 
+        }
 
-       
-        public void SetPopoverDescriptionFont(FontAttributes fontAttr) { edcHelpGui.SetPopoverDescriptionFont(fontAttr); }
+        public void SetPopoverDescriptionFont(FontAttributes fontAttr) 
+        { 
+            edcHelpGui.SetPopoverDescriptionFont(fontAttr);
+        }
 
         public void SetHoverDisplayPopover(bool enable)
         {
@@ -168,6 +177,16 @@ namespace edc_popover_dotnet.src.gui
         public void SetViewerDesktopServerURL(string url)
         {
             edcHelpGui.SetViewerDesktopServerURL(url);
+        }
+
+        public void SetViewerDesktopWidth(int width) 
+        { 
+            edcHelpGui.SetViewerDesktopWidth(width); 
+        }
+
+        public void SetViewerDesktopHeight(int height) 
+        { 
+            edcHelpGui.SetViewerDesktopHeight(height); 
         }
 
         public void SetBackgroundColor(BrushMedia backgroundColor)

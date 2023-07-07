@@ -21,7 +21,7 @@ namespace edc_popover_dotnet_example_app
     public partial class App : Application
     {
         static String languageCode = "en";
-        IDesktopProcess edcDesktop;
+        IEdcDesktop edcDesktop;
         IEdcHelpGui edcHelp;
         IEdcClient edcClient;
 
@@ -46,7 +46,7 @@ namespace edc_popover_dotnet_example_app
         {
             if (edcDesktop != null)
             {
-                edcDesktop.KillDesktopViewer();
+                edcDesktop.ShutDownDesktopViewer();
             }
         }
 
@@ -55,13 +55,18 @@ namespace edc_popover_dotnet_example_app
             TextBlock titleApp = new();
             String viewerDesktopPath = "";
             HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
-            String serverUrl =  "https://demo.easydoccontents.com";
+            String serverUrl = "https://demo.easydoccontents.com";
             
             edcHelp = EdcHelpSingletonGui.GetInstance();
             edcClient = EdcHelpSingletonGui.GetInstance().GetEdcClient();
 
+            
+
             if (!String.IsNullOrEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER)
             {
+                // Desktop viewer configuration
+                edcHelp.SetViewerDesktopWidth(800);
+                edcHelp.SetViewerDesktopHeight(800);
                 edcDesktop = EdcHelpSingletonGui.GetInstance().GetEdcDesktop();
                 edcDesktop.ConfigureDesktopProcess(edcHelp, viewerDesktopPath);
             }

@@ -39,6 +39,9 @@ We will be able to configure the url to get the documentation and the widget pro
 | Related topics display | ``SetRelatedTopicsDisplay`` | true | Enable the related topics |
 | Article display | ``SetArticleDisplay`` | true | Enable the article |
 | HelpViewer | ``SetHelpViewer`` | SYSTEM_BROWSER | EDC_DESKTOP_VIEWER |
+| Desktop Viewer | ``SetViewerDesktopServerURL`` | http://localhost:60000 | Define the desktop viewer url |
+| Desktop Viewer | ``SetViewerDesktopWidth`` | 1900 | Define the desktop viewer width |
+| Desktop Viewer | ``SetViewerDesktopHeight`` | 1200 | Define the desktop viewer height |
 
 ### with injection
 
@@ -123,20 +126,28 @@ EdcHelpSingletonGui.GetInstance().SetIconPath("my-icon.png");
 EdcHelpSingletonGui.GetInstance().SetLanguageCode("fr");
 EdcHelpSingletonGui.GetInstance().SetTooltipLabel("edc Help");
 EdcHelpSingletonGui.GetInstance().SetPopoverDisplay(true);
-EdcHelpSingletonGui.GetInstance().SetBackgroundColor(Color.BLUE);
+EdcHelpSingletonGui.GetInstance().SetBackgroundColor(Color.WHITE);
 EdcHelpSingletonGui.GetInstance().SetCloseIconPath("popover/close2.png");
 ```
 
-### Config desktop help viewer
+### Config desktop viewer
 
-If you want to use the desktop viewer, you have to set the viewerDesktopPath and viewerDesktopServerURL :
-```.NET
-  String viewerDesktopPath = "Here the path of desktop help viewer";
-  If you are using a custom server for the viewer desktop, set EdcHelpSingletonGui.GetInstance().SetViewerDesktopServerURL(Set the server url here); <--- Default server: http://localhost:60000
+If you want to use the desktop viewer, you should define the path
 ```
-And replace to the help configuration HelpViewer.SYSTEM_BROWSER by HelpViewer.EDC_DESKTOP_VIEWER
-```.NET
-  EdcHelpSingletonGui.GetInstance().SetHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+HelpViewer helpViewerMode = HelpViewer.EDC_DESKTOP_VIEWER;
+...
+EdcHelpSingletonGui.GetInstance().SetHelpViewer(helpViewerMode);
+EdcHelpSingletonGui.GetInstance().SetViewerDesktopPath("Define the path here");
+```
+
+If you want to configure the size of edc viewer desktop window, you should define the size with this method before the configureDesktop method
+```
+EdcHelpSingletonGui.GetInstance().SetViewerDesktopWidth(1000);
+EdcHelpSingletonGui.GetInstance().SetViewerDesktopHeight(800);
+```
+The default port is 60000, if you changed the port on the edc-desktop-viewer electron configuration, apply the new desktop server url with this method :
+```
+EdcHelpSingletonGui.GetInstance().SetViewerDesktopServerURL("Define the desktop server path here");
 ```
 
 
@@ -204,7 +215,7 @@ As an example, here is the en.json file used by default:
 You can find a simple implementation in the example section below
 
 ## Example
-To see this utility in action, just run this example
+To see this utility in action, just run this example the edc-popover-dotnet-example-app
 
 ## License
 

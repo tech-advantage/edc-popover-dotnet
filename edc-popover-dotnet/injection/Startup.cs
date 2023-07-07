@@ -12,6 +12,8 @@ using System.Windows;
 using edc_popover_dotnet.src.desktop;
 using edc_popover_dotnet.src.internalImpl.desktop;
 using edc_popover_dotnet.factory;
+using edc_popover_dotnet.src;
+using edc_popover_dotnet.src.internalImpl;
 
 namespace edc_popover_dotnet.injection
 {
@@ -27,7 +29,8 @@ namespace edc_popover_dotnet.injection
             services.AddTransient<IContextualTitleComponentBuilder<UIElement>, ContextualTitleComponentBuilderImpl>();
             services.AddTransient<IHelpListenerFactory, HelpListenerFactory>();
             services.AddSingleton<IEdcHelpGui, EdcHelpGuiImpl>();
-            services.AddSingleton<IDesktopProcess, EdcDesktopProcess>();
+            services.AddSingleton<IEdcDesktop, EdcDesktopImpl>();
+            services.AddSingleton<IHttpRestRequest, HttpRestRequestImpl>();
             services.AddSingleton<Popover>();
             services.AddScoped<OpenUrlAction>();
 

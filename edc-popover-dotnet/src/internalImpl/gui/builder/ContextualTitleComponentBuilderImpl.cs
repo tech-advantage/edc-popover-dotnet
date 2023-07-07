@@ -174,6 +174,5 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             _logger.Debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
             return this.edcClient.GetLabel(key, languageCode, publicationId);
         }
-
     }
 }

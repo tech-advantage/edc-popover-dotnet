@@ -111,6 +111,16 @@ namespace edc_popover_dotnet.src.internalImpl
             helpConfiguration.ViewerDesktopServerUrl = url;
         }
 
+        public void SetViewerDesktopWidth(int width)
+        {
+            helpConfiguration.ViewerDesktopWidth = width;
+        }
+
+        public void SetViewerDesktopHeight(int height)
+        {
+            helpConfiguration.ViewerDesktopHeight = height;
+        }
+
         public void SetDarkMode(bool enable)
         {
             helpConfiguration.DarkMode = enable;
