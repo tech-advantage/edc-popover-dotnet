@@ -18,7 +18,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | IconDarkModePath | ``SetIconDarkModePath`` | icons/icon2-32px.png | The help icon dark displays in the component |
 | Tooltip display | ``SetTooltipDisplay`` | true | Display the tooltip on the help icon and close icon in popover |
 | Popover Help | ``SetPopoverDisplay`` | false | Display the help summary dialog |
-| Hover display popover | ``SetHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
+| Hover display popover | ``SetHoverDisplayPopover`` | false | Display the popover when the mouse is over it |
 | Separator | ``SetSeparatorDisplay`` | true | Display the separator in the help header |
 | Background color | ``SetBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``SetSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
@@ -207,7 +207,13 @@ As an example, here is the en.json file used by default:
 {
   "labels": {
     "articles": "Need more...",
-    "links": "Related topics"
+    "links": "Related topics",
+    "iconAlt": "Help",
+    "comingSoon": "Contextual help is coming soon.",
+    "errorTitle":  "Error"
+  },
+  "errors": {
+    "failedData": "An error occurred when fetching data !\nCheck the brick keys provided to the EdcHelp component."
   }
 }
 ```

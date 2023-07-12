@@ -3,11 +3,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using edc_popover_dotnet.src.components;
 using edc_popover_dotnet.src.internalImpl.gui.tools;
 using edc_popover_dotnet.src.internalImpl.model;
 using NLog;
 using Brush = System.Windows.Media.Brush;
+using WpfScreenHelper;
 
 namespace edc_popover_dotnet.src.internalImpl.gui.components
 {
@@ -131,11 +133,10 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
             AllowsTransparency = true;
             Topmost = true;
             Focusable = true;
-            SizeToContent = SizeToContent.WidthAndHeight;
             /* Create border around the popover */
             BorderThickness = new Thickness(1, 1, 1, 1);
             BorderBrush = new SolidColorBrush(Color.FromRgb(60, 141, 188));
-
+            
             mainPanel = new DockPanel();
             headerPanel = new StackPanel();
             
@@ -212,46 +213,95 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
 
             return header;
         }
-
+        
         public void SetLocation(double x, double y)
         {
-            double width = Width;
-            double height = Height;
+            _logger.Debug("new location: ({}, {})", x, y);
+            
+            double width = ActualWidth;
+            double height = ActualHeight;
 
-            double widthDisplay = SystemParameters.PrimaryScreenWidth;
-            double heightDisplay = SystemParameters.PrimaryScreenHeight;
-
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+           
             double newX = x;
             double newY = y;
 
-            int padX = 0;
-            int padY = 0;
+            double padX = 0;
+            double padY = 0;
             bool reverseX = false;
-            bool reverseY = false;
 
             if (direction == HORIZONTAL)
                 padY = 5;
             else
                 padX = 5;
 
-            if (x + width + padX > widthDisplay)
+            Screen currentDevice = null;
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                if (screen.Bounds.Contains(x, y))
+                {
+                    currentDevice = screen;
+                    break;
+                }
+            }
+
+            _logger.Debug("width: {}, height: {}, currentDevice: {}", width, height, currentDevice);
+
+            var targetBounds = currentDevice.Bounds;
+            double targetWidth = targetBounds.Width;
+            double targetHeight = targetBounds.Height;
+
+            switch (this.popoverPlacement)
+            {
+                case PopoverPlacement.RIGHT:
+                    _logger.Debug("Popover positioned on RIGHT side");
+                    newX = newX + (reverseX ? -padX : padX);
+                    break;
+                case PopoverPlacement.LEFT:
+                    _logger.Debug("Popover positioned on LEFT side");
+                    newX = x - width;
+                    
+                    if (newX < targetBounds.X)
+                    {
+                        newX = newX + width;
+                        reverseX = false;
+                    }
+                    break;
+                case PopoverPlacement.TOP:
+                    _logger.Debug("Popover positioned on TOP side" + (y - height));
+                    newY = y - height;
+                    newX = newX - width / 2;
+
+                    if (newY < targetBounds.Y)
+                    {
+                        newY = y;
+                    }
+                    break;
+                case PopoverPlacement.BOTTOM:
+                    _logger.Debug("Popover positioned on BOTTOM side");
+                    newX = newX + (reverseX ? -padX : padX) - width / 2;
+                    if (newX < targetBounds.X)
+                    {
+                        newX = x;
+                    }
+                    break;
+                default:
+                    newX = newX + (reverseX ? -padX : padX);
+                    break;
+            }
+
+            if (newX + width > targetBounds.X + targetWidth)
             {
                 newX = x - width;
-                reverseX = true;
-
             }
-            if (y + height + padY > heightDisplay)
+            if (newY + height > targetBounds.Y + targetHeight)
             {
                 newY = y - height;
-                reverseY = true;
             }
-            if (direction == HORIZONTAL)
-                newY += (reverseY ? -padY : padX);
-            else
-                newX += (reverseX ? -padX : padX);
 
             Left = newX;
-            Top = newY; 
+            Top = newY;
         }
     }
 }

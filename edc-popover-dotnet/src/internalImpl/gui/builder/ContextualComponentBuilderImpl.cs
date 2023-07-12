@@ -102,7 +102,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
         public IContextualComponentBuilder<UIElement> SetIconDarkModePath(string iconPath)
         {
             iconDarkModePath = iconPath;
-            _logger.Debug("Enable DarkMode: {}", iconPath);
+            _logger.Debug("Set Icon DarkMode path: {}", iconPath);
             return this;
         }
 
