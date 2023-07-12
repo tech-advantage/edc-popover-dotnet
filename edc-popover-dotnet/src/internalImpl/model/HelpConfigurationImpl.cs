@@ -28,7 +28,7 @@ namespace edc_popover_dotnet.src.internalImpl.model
         private FontAttributes popoverSectionTitleFont = new(new FontFamily("Arial"), 12, FontWeights.Bold);
         private SolidColorBrush popoverSectionTitleColor = new SolidColorBrush(Colors.Black);
         private Boolean showArticle = true;
-        private PopoverPlacement popoverPlacement;
+        private PopoverPlacement popoverPlacement = PopoverPlacement.RIGHT;
         private Boolean showSeparator = true;
         private Brush separatorColor = Brushes.Red;
         private HelpViewer helpViewer;
