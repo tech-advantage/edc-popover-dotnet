@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Brush = System.Windows.Media.Brush;
 using edc_popover_dotnet.src.internalImpl.gui.tools;
 using System.Windows.Media;
@@ -137,6 +137,20 @@ namespace edc_popover_dotnet.src.internalImpl.model
         /// </summary>
         /// <returns>the url of viewer desktop server</returns>
         String ViewerDesktopServerUrl { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the viewer desktop window width</para>
+        ///     SET: viewer desktop window width
+        /// </summary>
+        /// <returns>the viewer desktop window width</returns>
+        int ViewerDesktopWidth { get; set; }
+
+        /// <summary>
+        ///     <para>GET: the viewer desktop window height</para>
+        ///     SET: viewer desktop window height
+        /// </summary>
+        /// <returns>the viewer desktop window height</returns>
+        int ViewerDesktopHeight { get; set; }
 
         /// <summary>
         ///     <para>GET: the selected Popover placement between : TOP, RIGHT, BOTTOM, LEFT</para>

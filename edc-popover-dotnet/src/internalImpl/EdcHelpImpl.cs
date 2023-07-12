@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.internalImpl.model;
+using edc_popover_dotnet.src.internalImpl.model;
 
 namespace edc_popover_dotnet.src.internalImpl
 {
@@ -109,6 +109,16 @@ namespace edc_popover_dotnet.src.internalImpl
         public void SetViewerDesktopServerURL(string url)
         {
             helpConfiguration.ViewerDesktopServerUrl = url;
+        }
+
+        public void SetViewerDesktopWidth(int width)
+        {
+            helpConfiguration.ViewerDesktopWidth = width;
+        }
+
+        public void SetViewerDesktopHeight(int height)
+        {
+            helpConfiguration.ViewerDesktopHeight = height;
         }
 
         public void SetDarkMode(bool enable)

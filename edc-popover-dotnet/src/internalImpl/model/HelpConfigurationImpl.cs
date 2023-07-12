@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.internalImpl.gui.tools;
+using edc_popover_dotnet.src.internalImpl.gui.tools;
 using System;
 using System.Windows;
 using System.Windows.Media;
@@ -40,6 +40,8 @@ namespace edc_popover_dotnet.src.internalImpl.model
         private SolidColorBrush popoverDescriptionColor = new SolidColorBrush(Colors.Black);
         private FontAttributes popoverDescriptionFont = new(new FontFamily("Arial"), 12, FontWeights.Normal);
         private String viewerDesktopServerURL = "http://localhost:60000";
+        private int viewerDesktopWidth = 1900;
+        private int viewerDesktopHeight = 1200;
 
         public HelpConfigurationImpl()
         {
@@ -70,6 +72,8 @@ namespace edc_popover_dotnet.src.internalImpl.model
         public SolidColorBrush HeaderTitleColor { get => titleColor; set => titleColor = value; }
         public BrushMedia BackgroundColor { get => backgroundColor; set => backgroundColor = value; }
         public string ViewerDesktopServerUrl { get => viewerDesktopServerURL; set => viewerDesktopServerURL = value; }
+        public int ViewerDesktopWidth { get => viewerDesktopWidth; set => viewerDesktopWidth = value; }
+        public int ViewerDesktopHeight { get => viewerDesktopHeight; set => viewerDesktopHeight = value; }
         public BrushMedia SeparatorColor { get => separatorColor; set => separatorColor = value; }
         public bool ShowRelatedTopics { get => showRelatedTopics; set => showRelatedTopics = value; }
         public bool ShowArticle { get => showArticle; set => showArticle = value; }

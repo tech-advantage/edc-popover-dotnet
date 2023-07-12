@@ -30,6 +30,10 @@ namespace edc_popover_dotnet.src
 
         void SetViewerDesktopServerURL(String url);
 
+        void SetViewerDesktopWidth(int width);
+
+        void SetViewerDesktopHeight(int height);
+
         void SetPopoverPlacement(PopoverPlacement popoverPlacement);
 
         void SetTitleDisplay(Boolean enable);

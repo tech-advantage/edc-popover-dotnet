@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.builder;
+using edc_popover_dotnet.src.builder;
 using edc_popover_dotnet.src.internalImpl.model;
 using edcClientDotnet;
 using edcClientDotnet.model;
@@ -174,6 +174,5 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
             _logger.Debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
             return this.edcClient.GetLabel(key, languageCode, publicationId);
         }
-
     }
 }

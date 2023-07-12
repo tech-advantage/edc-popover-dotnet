@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.builder;
+using edc_popover_dotnet.src.builder;
 using edc_popover_dotnet.src.gui;
 using edc_popover_dotnet.src.internalImpl.model;
 using edc_popover_dotnet.src.utils;
@@ -58,12 +58,17 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
             }
         }
 
-        
         public void MouseClicked(object sender, RoutedEventArgs e)
         {
             var button = e.OriginalSource as Button;
-            var xPointValue = button.PointToScreen(new Point(button.ActualWidth, button.ActualHeight)).X;
-            var yPointValue = button.PointToScreen(new Point(button.ActualWidth, button.ActualHeight)).Y;
+
+            // Get the mouse position relative to the button
+            Point position = Mouse.GetPosition(button);
+            
+            Point pointToScreen = button.PointToScreen(position);
+
+            double x = pointToScreen.X; // X coordinate
+            double y = pointToScreen.Y;
 
             if (contextItem == null && helpConfiguration.IconState == IconState.DISABLED)
             {
@@ -73,7 +78,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
             {
                 if (helpConfiguration.PopoverDisplay)
                 {
-                    OpenPopover(xPointValue, yPointValue);
+                    OpenPopover(x, y);
                 }
                 else
                 {
@@ -105,7 +110,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                 if (helpConfiguration.HoverDisplayPopover)
                 {
                     var button = e.OriginalSource as Button;
-                    OpenPopover(button.PointToScreen(new Point(button.ActualWidth - 5, button.ActualHeight)).X, button.PointToScreen(new Point(button.ActualWidth, button.ActualHeight)).Y);
+                    OpenPopover((int)button.PointToScreen(new Point(button.ActualWidth, button.ActualHeight)).X, (int)button.PointToScreen(new Point(button.ActualWidth, button.ActualHeight)).Y);
                 }
             }
         }
@@ -128,7 +133,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
             }
         }
 
-        private void OpenPopover(Double x, Double y)
+        private void OpenPopover(double x, double y)
         {
             try
             {
@@ -174,11 +179,16 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                     popover.Add(bodyComponent);
 
                     popover.SetIconPath(helpConfiguration.CloseIconPath);
+
                     popover.UpdateLayout();
+                    popover.SizeToContent = SizeToContent.WidthAndHeight;
 
                     popover.Visibility = Visibility.Visible;
+                    Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        popover.SetLocation(x, y);
+                    });
 
-                    popover.SetLocation(x, y);
                     if (helpConfiguration.HoverDisplayPopover)
                     {
                         popover.EnableCloseOnLostFocus();

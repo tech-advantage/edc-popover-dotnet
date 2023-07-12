@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.builder;
+using edc_popover_dotnet.src.builder;
 using edc_popover_dotnet.src.internalImpl.model;
 using edc_popover_dotnet.src.utils;
 using edcClientDotnet;
@@ -345,7 +345,5 @@ namespace edc_popover_dotnet.src.internalImpl.gui.builder
 
             return titleLabel;
         }
-
-        
     }
 }
