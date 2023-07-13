@@ -137,10 +137,11 @@ namespace edc_popover_dotnet_example_app
             langSelectorPanel.Children.Add(langSelect);
             
             WrapPanel wrapHelpIconPanel = new();
+            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc", "help.center"));
             wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.configuration", "storehouses"));
-            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.showcase.external", "external.header"));
-            
-            
+            wrapHelpIconPanel.Children.Add(edcHelp.CreateComponent("fr.techad.edc.configuration", "example with error"));
+
+
             foreach (Button element in wrapHelpIconPanel.Children)
             {
                 element.HorizontalAlignment = HorizontalAlignment.Center;
@@ -154,7 +155,7 @@ namespace edc_popover_dotnet_example_app
                 VerticalAlignment = VerticalAlignment.Bottom
             };
 
-            IMouseListener mouseListener = edcHelp.GetMouseListener("fr.techad.edc.showcase.external", "external.header");
+            IMouseListener mouseListener = edcHelp.GetMouseListener("fr.techad.edc.configuration", "storehouses");
             Button helpButton = new Button();
 
             helpButton.VerticalAlignment = VerticalAlignment.Center;
