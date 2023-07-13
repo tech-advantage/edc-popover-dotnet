@@ -1,4 +1,4 @@
-﻿using edc_popover_dotnet.src.internalImpl.model;
+using edc_popover_dotnet.src.internalImpl.model;
 using NLog;
 using System;
 using System.Windows.Controls;
