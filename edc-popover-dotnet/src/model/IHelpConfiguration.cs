@@ -111,13 +111,6 @@ namespace edc_popover_dotnet.src.internalImpl.model
         Brush SeparatorColor { get; set; }
 
         /// <summary>
-        ///     <para>GET: the underline color.</para>
-        ///     SET: Define the underline color
-        /// </summary>
-        /// <returns>the underline color</returns>
-        Brush UnderlineColor { get; set; }
-
-        /// <summary>
         ///     <para>GET: the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER</para>
         ///     SET: Define the selected viewer type
         /// </summary>

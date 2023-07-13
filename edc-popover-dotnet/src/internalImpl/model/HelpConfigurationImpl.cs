@@ -18,7 +18,6 @@ namespace edc_popover_dotnet.src.internalImpl.model
         private Boolean popoverDisplay = false;
         private Boolean hoverPopoverDisplay = false;
         private BrushMedia backgroundColor;
-        private BrushMedia underlineColor;
         private Boolean showTitle = true;
         private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
         private IconState iconState = IconState.SHOWN;
@@ -28,12 +27,12 @@ namespace edc_popover_dotnet.src.internalImpl.model
         private FontAttributes popoverSectionTitleFont = new(new FontFamily("Arial"), 12, FontWeights.Bold);
         private SolidColorBrush popoverSectionTitleColor = new SolidColorBrush(Colors.Black);
         private Boolean showArticle = true;
-        private PopoverPlacement popoverPlacement;
+        private PopoverPlacement popoverPlacement = PopoverPlacement.RIGHT;
         private Boolean showSeparator = true;
-        private Brush separatorColor = Brushes.Red;
+        private Brush separatorColor;
         private HelpViewer helpViewer;
         private String desktopViewerPath = "";
-        private FontAttributes headerTitleFont = new(new FontFamily("Dialog"), 20, FontWeights.Bold);
+        private FontAttributes headerTitleFont = new(new FontFamily("Arial"), 20, FontWeights.Bold);
         private SolidColorBrush titleColor = new SolidColorBrush(Colors.Black);
         private SolidColorBrush popoverLinksColor = new SolidColorBrush(Colors.Blue);
         private FontAttributes popoverLinksFont = new(new FontFamily("Arial"), 12, FontWeights.Normal);
@@ -45,10 +44,8 @@ namespace edc_popover_dotnet.src.internalImpl.model
 
         public HelpConfigurationImpl()
         {
-            Brush rgbColor = new SolidColorBrush(Color.FromRgb(0, 255, 0));
-            Brush rgbColorUnderline = new SolidColorBrush(Color.FromRgb(60, 141, 188));
-            this.backgroundColor = new SolidColorBrush(((SolidColorBrush)rgbColor).Color);
-            this.underlineColor = new SolidColorBrush(((SolidColorBrush)rgbColorUnderline).Color);
+            this.backgroundColor = new SolidColorBrush(Colors.White);
+            this.separatorColor = new SolidColorBrush(Color.FromRgb(60, 141, 188));
         }
 
         public string IconPath { get => iconPath; set => iconPath = value; }
@@ -59,7 +56,6 @@ namespace edc_popover_dotnet.src.internalImpl.model
         public string TooltipLabel { get => tooltipLabel; set => tooltipLabel = value; }
         public bool PopoverDisplay { get => popoverDisplay; set => popoverDisplay = value; }
         public bool HoverDisplayPopover { get => hoverPopoverDisplay; set => hoverPopoverDisplay = value; }
-        public BrushMedia UnderlineColor { get => underlineColor; set => underlineColor = value; }
         public HelpViewer HelpViewer { get => helpViewer; set => helpViewer = value; }
         public string ViewerDesktopPath { get => desktopViewerPath; set => desktopViewerPath = value; }
         public PopoverPlacement PopoverPlacement { get => popoverPlacement; set => popoverPlacement = value; }

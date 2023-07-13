@@ -183,10 +183,10 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
                     popover.UpdateLayout();
                     popover.SizeToContent = SizeToContent.WidthAndHeight;
 
-                    popover.Visibility = Visibility.Visible;
                     Application.Current.Dispatcher.InvokeAsync(() =>
                     {
                         popover.SetLocation(x, y);
+                        popover.Visibility = Visibility.Visible;
                     });
 
                     if (helpConfiguration.HoverDisplayPopover)

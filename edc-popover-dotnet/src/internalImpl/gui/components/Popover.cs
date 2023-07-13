@@ -30,7 +30,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
         private readonly int direction = VERTICAL;
         private int closablePosition;
         private UIElement? closableComponent;
-        private PopoverPlacement popoverPlacement;
+        private PopoverPlacement popoverPlacement = PopoverPlacement.RIGHT;
         private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public void SetPopoverPlacement(PopoverPlacement placement)
@@ -151,6 +151,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
             
             SetClosePosition(closablePosition);
             Content = mainPanel;
+
             LostFocus += (sender, args) => { Hide(); };
         }
 
@@ -190,7 +191,7 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
 
         public void CloseOnMouseClickOutside()
         {
-            this.Deactivated += HidePopover;
+           this.Deactivated += HidePopover;
         }
 
         public void HidePopover(object sender, EventArgs e)
@@ -217,7 +218,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui.components
         public void SetLocation(double x, double y)
         {
             _logger.Debug("new location: ({}, {})", x, y);
-            
             double width = ActualWidth;
             double height = ActualHeight;
 

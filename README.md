@@ -13,28 +13,28 @@ We will be able to configure the url to get the documentation and the widget pro
 |--|--|--|--|
 | Icon Path| ``SetIconPath`` | icons/icon-32px.png| The help icon displays in the component |
 | Language Code | ``SetLanguageCode`` | en | The help language code |
-| Tooltip | ``SetTooltipLabel`` | '' | The tooltip displays on the help icon |
+| Tooltip | ``SetTooltipLabel`` | 'help' | The tooltip displays on the help icon |
 | DarkMode | ``SetDarkMode`` | false | Enable the dark mode for icon |
 | IconDarkModePath | ``SetIconDarkModePath`` | icons/icon2-32px.png | The help icon dark displays in the component |
 | Tooltip display | ``SetTooltipDisplay`` | true | Display the tooltip on the help icon and close icon in popover |
 | Popover Help | ``SetPopoverDisplay`` | false | Display the help summary dialog |
 | Hover display popover | ``SetHoverDisplayPopover`` | false | Display the popover when the mouse is over it |
 | Separator | ``SetSeparatorDisplay`` | true | Display the separator in the help header |
-| Background color | ``SetBackgroundColor`` | WHITE | Background color of the help dialog |
-| Separator color | ``SetSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
-| Font attributes | ``SetHeaderTitleFontAttributes`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of Popover main title in the header of the help dialog |
-| Header title color | ``SetHeaderTitleColor`` | BLACK | Color of Popover main title in the header of the help dialog |
-| Font attributes | ``SetPopoverDescriptionFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of Popover description of the help dialog |
-| Popover description color | ``SetPopoverDescriptionColor`` | BLACK | Color of Popover description of the help dialog |
-| Font attributes | ``SetPopoverSectionTitleFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Bold) | Font attributes of the popover section title ("Need more" | "Related topics") in the help dialog |
-| Title color | ``SetPopoverSectionTitleColor`` | BLACK | Color of the popover section title ("Need more" & "Related topics") in the help dialog |
-| Font attributes | ``SetPopoverLinksFont`` | new FontAttributes(new FontFamily("Arial"), 14, FontWeights.Normal) | Font attributes of Popover links of the help dialog |
-| Popover links color | ``SetPopoverLinksColor`` | BLUE | Color of Popover links of the help dialog |
-| Close Icon | ``SetCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
+| Separator color | ``SetSeparatorColor`` | RGB(60, 141, 188) | Separator color of the help dialog |
+| Background color | ``SetBackgroundColor`` | White | Background color of the help dialog |
+| Font attributes | ``SetHeaderTitleFont`` | new FontAttributes(new FontFamily("Arial"), 20, FontWeights.Bold) | Font attributes of Popover main title in the header of the help dialog |
+| Header title color | ``SetHeaderTitleColor`` | Black | Color of Popover main title in the header of the help dialog |
+| Font attributes | ``SetPopoverDescriptionFont`` | new FontAttributes(new FontFamily("Arial"), 12, FontWeights.Normal) | Font attributes of Popover description of the help dialog |
+| Popover description color | ``SetPopoverDescriptionColor`` | Black | Color of Popover description of the help dialog |
+| Font attributes | ``SetPopoverSectionTitleFont`` | new FontAttributes(new FontFamily("Arial"), 12, FontWeights.Bold) | Font attributes of the popover section title ("Need more" | "Related topics") in the help dialog |
+| Title color | ``SetPopoverSectionTitleColor`` | Black | Color of the popover section title ("Need more" & "Related topics") in the help dialog |
+| Font attributes | ``SetPopoverLinksFont`` | new FontAttributes(new FontFamily("Arial"), 12, FontWeights.Normal) | Font attributes of Popover links of the help dialog |
+| Popover links color | ``SetPopoverLinksColor`` | Blue | Color of Popover links of the help dialog |
+| Close Icon | ``SetCloseIconPath`` | popover/close.png | The close icon display in the summary dialog |
 | Error Icon | ``SetErrorIconPath`` | icons/icon_exclamation-32px.png | The error icon displays in the component |
-| Popover placement | ``SetPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
-| Error behavior | ``SetErrorBehavior`` | ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER | Set the error behavior of popover |
-| Icon state | ``SetIconState`` | ERROR, SHOWN, HIDDEN, DISABLED | Set the icon behavior of popover |
+| Popover placement | ``SetPopoverPlacement`` | RIGHT | (TOP, RIGHT, BOTTOM, LEFT) Set the position of popover |
+| Error behavior | ``SetErrorBehavior`` | FRIENDLY_MSG | (ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER) Set the error behavior of popover |
+| Icon state | ``SetIconState`` | SHOWN | (ERROR, SHOWN, HIDDEN, DISABLED) Set the icon behavior of popover |
 | Title | ``SetTitleDisplay`` | true | Display the title in the help dialog |
 | Related topics display | ``SetRelatedTopicsDisplay`` | true | Enable the related topics |
 | Article display | ``SetArticleDisplay`` | true | Enable the article |
@@ -46,8 +46,8 @@ We will be able to configure the url to get the documentation and the widget pro
 ### with injection
 
 Based on Microsoft DependencyInjection, you need to call the ConfigureServices method from edcClientDotnet, then get the services static variable of type IServiceCollection type from edcClientDotnet and set it to the ConfigureService method of edcPopoverDotnet. 
-```.NET
 
+```cs
 String viewerDesktopPath = "";
 
 HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
@@ -73,7 +73,7 @@ Example example = new Example(edcHelp);
 example.Configure();
 ```
 
-```.NET
+```cs
 public class Example
     {
         private IEdcHelpGui help;
@@ -101,7 +101,7 @@ public class Example
 ### with Singleton
 
 To define the server url:  
-```.NET
+```cs
 String viewerDesktopPath = "";
 
 HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
@@ -121,7 +121,7 @@ EdcHelpSingletonGui.GetInstance().GetEdcClient().SetServerUrl(serverUrl);
 ```  
 
 To change the icon path and the default language
-```.NET
+```cs
 EdcHelpSingletonGui.GetInstance().SetIconPath("my-icon.png");
 EdcHelpSingletonGui.GetInstance().SetLanguageCode("fr");
 EdcHelpSingletonGui.GetInstance().SetTooltipLabel("edc Help");
@@ -162,7 +162,7 @@ To create the component, you just need to
 
 Get the instance of ``EdcHelpSingletonGui`` and call the method ``CreateComponent`` with two parameters : the main and sub key, you are defined in the brick  
 
-```.NET
+```cs
 EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc", "help.center");
 ```
 
@@ -174,7 +174,7 @@ If you want to change the default icon for some button, you can call the createC
 
 Get the instance of ``EdcHelpSingletonGui`` and call the method ``CreateComponent`` with 3 parameters : the main and sub key, you are defined in the brick and the icon path 
 
-```.NET
+```cs
 EdcHelpSingletonGui.GetInstance().CreateComponent("fr.techad.edc", "help.center", "popover/close1.png");
 ```
 
