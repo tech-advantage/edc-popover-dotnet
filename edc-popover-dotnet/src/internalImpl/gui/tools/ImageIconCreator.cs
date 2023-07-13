@@ -9,8 +9,6 @@ namespace edc_popover_dotnet.src.internalImpl.gui.tools
 {
     public class ImageIconCreator : Image
     {
-        private readonly static Logger _logger = LogManager.GetCurrentClassLogger();
-
         public ImageIconCreator(String? path, Stretch? stretch)
         {
             CreateImageIcon(path, stretch);
@@ -18,10 +16,13 @@ namespace edc_popover_dotnet.src.internalImpl.gui.tools
 
         public ImageIconCreator(String? path, Stretch? stretch, bool enable, IconState state)
         {
-            CreateImageIcon(path, stretch);
-            if (enable == false && state == IconState.DISABLED)
+            if(path != "")
             {
-                this.Opacity = 0.5;
+                CreateImageIcon(path, stretch);
+                if (enable == false && state == IconState.DISABLED)
+                {
+                    this.Opacity = 0.5;
+                }
             }
         }
 
